@@ -8,7 +8,9 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
     protected Vector2Int startPos = Vector2Int.zero;
 
     public void GenerateDungeon() {
-        // Reset the dungeon to an empty tilemap
+        // Set the reference to ImageHandler
+        visualizer.Init();
+        // Reset the dungeon to an empty tilemap if it already exists
         visualizer.Clear();
         // Invoke proper generation method
         Generate();

@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Constants;
 
-public class Player : Singleton<Player>
+public class Player : PersistentSingleton<Player>
 {
     [SerializeField]
     private Inventory inventory;
     [SerializeField]
     private HealthUI healthUI;
-    // Player derives after singleton, cause there may be only one
     override protected void Awake()
     {
         base.Awake();
         inventory = new Inventory();
+    }
+
+    public void AddToPlayerInventory(itemType item) {
+        inventory.AddItem(item);
+    }
+
+    public void GainHealth(int amount) {
+        // Do something
     }
 
     void Update()

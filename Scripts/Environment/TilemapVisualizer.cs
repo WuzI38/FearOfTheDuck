@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Constants;
 
 public class TilemapVisualizer : Singleton<TilemapVisualizer>
 {
@@ -11,16 +12,7 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
     private Tilemap tilemap, wallTilemap;
     private ImageManager Imanager;
 
-    enum tileType {
-        floor,
-        wall,
-        start,
-        exit,
-        spike,
-    }
-
-    protected override void Awake() {
-        base.Awake();
+    public void Init() {
         Imanager = GameObject.FindGameObjectWithTag("ImageHandler").GetComponent<ImageManager>();
     }
     
@@ -51,18 +43,18 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
 
     // Paint a single wall tile
     public void CreateWall(Vector2Int position) {
-        CreateTile(position, wallTilemap, Imanager.GetTile((int)tileType.wall));
+        CreateTile(position, wallTilemap, Imanager.GetTile(tileType.wall));
     }
 
     public void CreateSpike(Vector2Int position) {
-        CreateTile(position, tilemap, Imanager.GetTile((int)tileType.spike));
+        CreateTile(position, tilemap, Imanager.GetTile(tileType.spike));
     }
 
     public void CreateStart(Vector2Int position) {
-        CreateTile(position, tilemap, Imanager.GetTile((int)tileType.start));
+        CreateTile(position, tilemap, Imanager.GetTile(tileType.start));
     }
 
     public void CreateExit(Vector2Int position) {
-        CreateTile(position, tilemap, Imanager.GetTile((int)tileType.exit));
+        CreateTile(position, tilemap, Imanager.GetTile(tileType.exit));
     }
 }

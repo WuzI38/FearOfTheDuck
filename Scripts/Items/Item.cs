@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Constants;
 
-public class Item
+// This script is really short, as all the items currently implemented are guns
+
+public class Item : MonoBehaviour
 {
-    protected enum ItemType {
-        Health,
-        Rifle,
-        Pistol
+    protected itemType type;
+    public itemType Type {
+        get => type;
     }
-    protected ItemType type;
 }
+

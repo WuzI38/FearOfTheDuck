@@ -17,8 +17,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Reduce movement speed if player moves diagonally
         if(Mathf.Abs(horizontalMove) > 0 && Mathf.Abs(verticalMove) > 0) {
-            horizontalMove /= Mathf.Sqrt(2);
-            verticalMove /= Mathf.Sqrt(2);
+            float sqrt2 = Mathf.Sqrt(2);
+            horizontalMove /= sqrt2;
+            verticalMove /= sqrt2;
         }
 
         animator.SetFloat("speed",Mathf.Max(Mathf.Abs(horizontalMove), Mathf.Abs(verticalMove)));

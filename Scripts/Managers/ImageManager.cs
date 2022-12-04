@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Constants;
 
 public class ImageManager : Singleton<ImageManager>
 {
@@ -30,22 +31,22 @@ public class ImageManager : Singleton<ImageManager>
     [SerializeField]
     private Sprite rifle;
 
-    public TileBase GetTile(int tileName) {
+    public TileBase GetTile(tileType tileName) {
         TileBase tile = floorTile;
         switch(tileName) {
-            case 0:
+            case tileType.floor:
             default:
                 break;
-            case 1:
+            case tileType.wall:
                 tile = wallTile;
                 break;
-            case 2:
+            case tileType.start:
                 tile = startTile;
                 break;
-            case 3:
+            case tileType.exit:
                 tile = exitTile;
                 break;
-            case 4:
+            case tileType.spike:
                 tile = spikeTile;
                 break;
         }
