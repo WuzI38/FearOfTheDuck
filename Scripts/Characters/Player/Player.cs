@@ -12,7 +12,7 @@ public class Player : PersistentSingleton<Player>
     override protected void Awake()
     {
         base.Awake();
-        inventory = new Inventory();
+        inventory = gameObject.AddComponent<Inventory>();
     }
 
     public void AddToPlayerInventory(itemType item) {

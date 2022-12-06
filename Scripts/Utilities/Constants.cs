@@ -1,5 +1,6 @@
 namespace Constants 
 {
+    // Id of every single floor tile
     public enum tileType {
         floor,
         wall,
@@ -8,6 +9,7 @@ namespace Constants
         spike,
     }
 
+    // Id of every single gun
     public enum itemType {
         Null,
         Health,

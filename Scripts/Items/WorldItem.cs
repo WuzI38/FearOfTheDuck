@@ -28,7 +28,6 @@ public class WorldItem : MonoBehaviour
         if(other.CompareTag("Player")) {
             switch(type) {
                 case itemType.Health:
-                default:
                     playerScript.GainHealth(1);
                     break;
                 case itemType.Pistol:
@@ -39,6 +38,8 @@ public class WorldItem : MonoBehaviour
                     break;
                 case itemType.Rifle:
                     playerScript.AddToPlayerInventory(itemType.Rifle);
+                    break;
+                default:
                     break;
             }
         }
