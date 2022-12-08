@@ -8,9 +8,11 @@ public class CharacterController2D : MonoBehaviour
 	private bool facingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero; // Player's velocity
 	const float moveMult = 10f; // Multiply movement value by this constant
+	private Crosshair crosshair;
 
 	private void Awake() {
 		rigid = GetComponent<Rigidbody2D>();
+		crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<Crosshair>();
 	}
 
 
@@ -24,7 +26,15 @@ public class CharacterController2D : MonoBehaviour
 
 		// If the input is moving the player right and the player is facing left flip the player
 		// Analogously if the player is moving left
+
+		/*
 		if ((moveX > 0 && !facingRight) || (moveX < 0 && facingRight)) {
+			Flip();
+		}
+		*/
+
+		// New flip implementation - flip the player if the crosshair is behind his back
+		if ((crosshair.position.x > transform.position.x && !facingRight) || (crosshair.position.x < transform.position.x && facingRight)) {
 			Flip();
 		}
 	}

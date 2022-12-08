@@ -25,6 +25,20 @@ public class Player : PersistentSingleton<Player>
 
     void Update()
     {
-        
+        // Enable changing weapons
+        if(Input.GetAxis("Mouse ScrollWheel") > 0f ) { // forward 
+            inventory.SwapItem(1);
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0f ) { // backwards
+            inventory.SwapItem(-1);
+        }
+
+        // Enable getting rid of held weapons
+        if(Input.GetKeyDown(KeyCode.T)) {
+            inventory.RemoveItem();
+        }
+
+        // Chceck if rotation to crosshair pos is necessary
+        inventory.RotateItem();
     }
 }

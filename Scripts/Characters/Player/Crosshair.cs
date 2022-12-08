@@ -1,17 +1,19 @@
 using UnityEngine;
 
-public class Crosshair : MonoBehaviour
+public class Crosshair : Singleton<Crosshair>
 {
     private Vector2 crosshairPosition;
-    public Vector2 Position {
+    public Vector2 position {
         get => crosshairPosition;
     }
     private SpriteRenderer spriteRend;
     private Vector2 playerPos;
     Vector2 screenSize;
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
         Cursor.visible = false;
         spriteRend = this.GetComponentInChildren<SpriteRenderer>();
+        // Game resolution cannot be changed while playing, as it lets the player move the crosshair out of the borders
         screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
 

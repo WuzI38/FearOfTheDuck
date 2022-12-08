@@ -24,7 +24,7 @@ public class WorldItem : MonoBehaviour
     }
     // If the player collides with an object the object is added to player's inventory and then destroyed if it is a gun
     // If it's a health player gains 1 health instead
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")) {
             switch(type) {
                 case itemType.Health:

@@ -22,6 +22,7 @@ public class CorridorBase : RandomWalkGenerator
         List<Vector2Int> deadEnds = new List<Vector2Int>();
         List<Vector2Int> roomPositions = new List<Vector2Int>();
         HashSet<Vector2Int> spikePositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> startExitPositions = new HashSet<Vector2Int>();
     
         bool flag = false;
         int funkyFormula = (int)Mathf.Ceil(Mathf.Sqrt((float)corridorParams.roomCount / corridorParams.roomSquarePercent));
@@ -76,11 +77,13 @@ public class CorridorBase : RandomWalkGenerator
         floorPos.UnionWith(roomTiles);
 
         // Create spawn and exit tiles (position saved before during corridor generation)
-        StartAndExitPicker.CreateStartAndExit(floorPos, visualizer);
+        startExitPositions = StartAndExitPicker.CreateStartAndExit(floorPos, visualizer);
 
         // Visualize the dungeon
         visualizer.CreateFloorTiles(floorPos);
-        WallGenerator.CreateWalls(floorPos, visualizer, spikePositions);
+        
+        // Do not generate walls on the floor, start, exit and spike tiles
+        WallGenerator.CreateWalls(floorPos, visualizer, spikePositions, startExitPositions);
     }
 
     // Create full corridor layout

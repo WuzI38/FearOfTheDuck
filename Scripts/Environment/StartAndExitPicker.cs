@@ -20,11 +20,13 @@ public static class StartAndExitPicker
         }
     }
 
-    public static void CreateStartAndExit(HashSet<Vector2Int> floorPos, TilemapVisualizer visualizer) {
+    public static HashSet<Vector2Int> CreateStartAndExit(HashSet<Vector2Int> floorPos, TilemapVisualizer visualizer) {
+        HashSet<Vector2Int> sae = new HashSet<Vector2Int>();
         // Visualize start and exit tiles
         if(floorPos.Contains(exitPos)) {
             floorPos.Remove(exitPos);
             visualizer.CreateExit(exitPos);
+            sae.Add(exitPos);
         }
         // Create 4 spawn tiles
         Vector2Int[] points = {
@@ -37,7 +39,9 @@ public static class StartAndExitPicker
             if(floorPos.Contains(point)) {
                 floorPos.Remove(point);
                 visualizer.CreateStart(point);
+                sae.Add(point);
             }
         }
+        return sae;
     }
 }
