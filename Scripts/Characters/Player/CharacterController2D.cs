@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterController2D : MonoBehaviour
 {
 	[Range(0, .3f)] [SerializeField] 
-	private float movementSmoothing = .05f;	// How much to smooth out the movement
+	private float movementSmoothing = 0.05f;	// How much to smooth out the movement
 	private Rigidbody2D rigid; // For physics calculation
 	private bool facingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero; // Player's velocity

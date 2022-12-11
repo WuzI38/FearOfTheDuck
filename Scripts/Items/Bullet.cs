@@ -6,7 +6,9 @@ public class Bullet : MonoBehaviour
 {
     private Vector2 direction;
     private float damage;
-    bool initialized;
+    private bool initialized;
+    private Rigidbody2D rigid;
+    private float durability = 10;
     public void SetParams(Vector2 direction, float damage) {
         if(!initialized) {
             this.direction = direction;
@@ -17,12 +19,17 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         initialized = false;
+        rigid = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(initialized) {
-            transform.position += new Vector3(direction.x, direction.y, 0);
+            rigid.velocity = direction;
+        }
+        durability -= Time.fixedDeltaTime;
+        if(durability < 0) {
+            Destroy(gameObject);
         }
     }
 }

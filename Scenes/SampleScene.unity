@@ -8095,7 +8095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1600212768}
   animator: {fileID: 1600212767}
-  runSpeed: 40
+  runSpeed: 30
 --- !u!114 &1600212770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25491,3 +25491,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad042a595d012348ac0256116a54221, type: 3}
+--- !u!1001 &6197504141976338972
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833312, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936788704833343, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_Name
+      value: ShotgunWorldItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514936789711343577, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}
+      propertyPath: m_Name
+      value: shotgun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92669a6464f5bf8449533ec62bfdba8b, type: 3}

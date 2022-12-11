@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507576ff2e50ff848af45eeab2e4a736, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  Description: Rifle - high damage and reload time, low max ammo
-  damage: 7
-  spread: 0
+  Description: Pistol - low damage and delay between shots
+  damage: 8
+  spread: 15
   reloadTime: 1
-  bulletSpeed: 3
+  bulletSpeed: 320
   delay: 0.2
-  maxAmmo: 20
+  maxAmmo: 30

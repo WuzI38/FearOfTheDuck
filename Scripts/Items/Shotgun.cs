@@ -6,16 +6,24 @@ public class Shotgun : Gun
 {
     public Shotgun(MonoBehaviour player, GunScriptable gunParams) : base(player, gunParams){
         // Set all the parameters (using scriptable object) - inherited from gun
-        type = Constants.itemType.Rifle;
+        type = Constants.itemType.Shotgun;
     }
     public override void Shoot() {
         // You cannot shoot while reloading or if you have no ammo
-        if(!canFire || currentAmmo == 0) return;
+        if(!canFire) return;
+        if(currentAmmo == 0) {
+            Reload();
+            return;
+        }
         canFire = false;
         currentAmmo -= 1;
         // FindObjectOfType<AudioManager>().Play("Shoot");
-        // Here goes bullet instantiation + shooting logic
-        // Wait for some amount of time between shots
+
+        // Wait for some amount of time given in the gunParams object
+        for(int x = -20; x <= 20; x += 10) {
+            InstantiateBullet(x);
+        }
+        
         player.StartCoroutine(ShootDelay());
     }
 }

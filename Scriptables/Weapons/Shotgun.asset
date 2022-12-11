@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 507576ff2e50ff848af45eeab2e4a736, type: 3}
-  m_Name: Rifle
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  Description: Rifle - high damage and reload time and delay between shots
-  damage: 20
-  spread: 5
-  reloadTime: 3
-  bulletSpeed: 400
-  delay: 0.5
-  maxAmmo: 15
+  Description: Shotgun - multiple bullets with low damage
+  damage: 5
+  spread: 10
+  reloadTime: 2
+  bulletSpeed: 350
+  delay: 0.4
+  maxAmmo: 5

@@ -6,13 +6,10 @@ I've decided to divide it into categories, cause there is a lot of stuff to do
 
 # TODO:
 ## Player:
-* Make guns in player's hand functional
-* Implement getting and loosing health
+* Implement gaining and loosing health
 
 ## Items:
 * Add picking hearts
-* Add bullets
-* Implement shooting
 * Implement item spawning (Probably random, maybe in chests)
 
 ## Dungeon:
