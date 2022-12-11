@@ -20,7 +20,7 @@ public class Shotgun : Gun
         // FindObjectOfType<AudioManager>().Play("Shoot");
 
         // Wait for some amount of time given in the gunParams object
-        for(int x = -20; x <= 20; x += 10) {
+        for(float x = -(spread*2); x <= (spread*2); x += spread) {
             InstantiateBullet(x);
         }
         
