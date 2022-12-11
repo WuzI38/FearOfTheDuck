@@ -8,13 +8,6 @@ public abstract class ScriptableBase : ScriptableObject {
     public string Description;
 }
 
-public abstract class ScriptableObjectBase : ScriptableBase {
-    // Basic template for all environment elements
-    public Type Type;
-    public string ImagePath;
-    public bool Collider;
-}
-
 public abstract class ScriptableUnitBase : ScriptableBase {
     // Basic template for the player and all of the enemies
     public Type Type;
@@ -26,8 +19,5 @@ public abstract class ScriptableUnitBase : ScriptableBase {
 
 public enum Type {
     Hero = 0,
-    Enemy = 1,
-    Block = 2,
-    Item = 3,
-    GeneratorPreset = 4,
+    Duck = 1,
 }

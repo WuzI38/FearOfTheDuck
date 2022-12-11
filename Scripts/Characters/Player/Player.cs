@@ -9,13 +9,16 @@ public class Player : PersistentSingleton<Player>
     private Inventory inventory;
     [SerializeField]
     private HealthUI healthUI;
+    private Gun gun;
+    private GameObject gunPrefab;
     override protected void Awake()
     {
         base.Awake();
         inventory = gameObject.AddComponent<Inventory>();
+        gun = null;
     }
 
-    public void AddToPlayerInventory(itemType item) {
+    public void AddToPlayerInventory(Gun item) {
         inventory.AddItem(item);
     }
 
@@ -40,5 +43,14 @@ public class Player : PersistentSingleton<Player>
 
         // Chceck if rotation to crosshair pos is necessary
         inventory.RotateItem();
+
+        if(Input.GetMouseButtonDown(0)) {
+            gun = inventory.heldItem;
+            // Old implementation - now prefab is not needed - unithy mrthod mas used to find muzzle's position
+            // Check if the player has a weapon
+            if(gun != null) {
+                gun.Shoot();
+            }
+        }
     }
 }

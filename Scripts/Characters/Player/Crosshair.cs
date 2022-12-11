@@ -7,14 +7,24 @@ public class Crosshair : Singleton<Crosshair>
         get => crosshairPosition;
     }
     private SpriteRenderer spriteRend;
+    public float spriteY {
+        get => spriteRend.size.y;
+    }
     private Vector2 playerPos;
-    Vector2 screenSize;
+    private Vector2 screenSize;
     protected override void Awake() {
         base.Awake();
         Cursor.visible = false;
         spriteRend = this.GetComponentInChildren<SpriteRenderer>();
         // Game resolution cannot be changed while playing, as it lets the player move the crosshair out of the borders
         screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+    }
+
+    public void ResizeToScreen() {
+        Vector2 newSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        if(newSize != screenSize) {
+            screenSize = newSize;
+        }
     }
 
     void Update() {

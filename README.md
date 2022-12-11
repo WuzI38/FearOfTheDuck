@@ -10,8 +10,8 @@ I've decided to divide it into categories, cause there is a lot of stuff to do
 * Implement getting and loosing health
 
 ## Items:
-* Add guns based on the gun class (Polymorphism)
-* Implement rotating guns, so they face crosshair's position - MUST BE FIXED - IN PROGRESS
+* Add picking hearts
+* Add bullets
 * Implement shooting
 * Implement item spawning (Probably random, maybe in chests)
 
@@ -30,6 +30,5 @@ I've decided to divide it into categories, cause there is a lot of stuff to do
 ## Other:
 * Add sounds to particular actions + collect the remaining sounds
 * Implement game menu
-* Add chest image (optional)
 * Add background music (optional)
 * Add shadows to enemies

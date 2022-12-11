@@ -3,7 +3,7 @@ using Constants;
 
 // This script is really short, as all the items currently implemented are guns
 
-public class Item : MonoBehaviour
+public abstract class Item
 {
     protected itemType type;
     public itemType Type {
