@@ -103,4 +103,15 @@ public class Inventory : PersistentSingleton<Inventory>
             handTransform.RotateAround(player.position, Vector3.forward, diff);
         }
     }
+
+    public List<string> AsString() {
+        // Return every inventory item as string
+        if(gunList.Count == 0) return null;
+        List<string> names = new List<string>();
+        foreach(Gun gun in gunList) {
+            Constants.itemType type = gun.Type;
+            names.Add(type.ToString());
+        }
+        return names;
+    }
 }

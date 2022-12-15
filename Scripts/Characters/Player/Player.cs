@@ -5,17 +5,18 @@ using Constants;
 
 public class Player : PersistentSingleton<Player>
 {
-    [SerializeField]
     private Inventory inventory;
-    [SerializeField]
     private HealthUI healthUI;
     private Gun gun;
     private GameObject gunPrefab;
     private bool shooting;
+    private const int MAXHEALTH = 3;
     override protected void Awake()
     {
         base.Awake();
         inventory = gameObject.AddComponent<Inventory>();
+        healthUI = gameObject.AddComponent<HealthUI>(); 
+        healthUI.SetStartingHealth(MAXHEALTH);
         gun = null;
         shooting = false;
     }
@@ -25,7 +26,11 @@ public class Player : PersistentSingleton<Player>
     }
 
     public void GainHealth(int amount) {
-        // Do something
+        healthUI.GainHealth(amount);
+    }
+
+    public List<string> GetInventoryAsString() {
+        return inventory.AsString();
     }
 
     void Update()

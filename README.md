@@ -6,10 +6,10 @@ I've decided to divide it into categories, cause there is a lot of stuff to do
 
 # TODO:
 ## Player:
-* Implement gaining and loosing health
+* Loosing health
+* Spawning player
 
 ## Items:
-* Add picking hearts
 * Implement item spawning (Probably random, maybe in chests)
 
 ## Dungeon:

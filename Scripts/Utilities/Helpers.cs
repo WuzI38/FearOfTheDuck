@@ -14,6 +14,13 @@ namespace Helpers
         public static int CalculateMaxRoomSize(int corridorLen) {
             return corridorLen / 2 - 4;
         }
+
+         public static T RandomEnumValue<T>()
+        {
+            var values = System.Enum.GetValues(typeof(T));
+            int random = UnityEngine.Random.Range(0, values.Length);
+            return (T)values.GetValue(random);
+        }
     }
 
     public static class Direction2D {
