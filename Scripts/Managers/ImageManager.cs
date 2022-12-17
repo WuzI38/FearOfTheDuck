@@ -14,7 +14,13 @@ public class ImageManager : Singleton<ImageManager>
     private TileBase wallTile;
 
     [SerializeField]
-    private TileBase spikeTile;
+    private TileBase spikeTile0;
+    [SerializeField]
+    private TileBase spikeTile1;
+    [SerializeField]
+    private TileBase spikeTile2;
+    [SerializeField]
+    private TileBase spikeTile3;
 
     [SerializeField]
     private TileBase startTile;
@@ -46,8 +52,17 @@ public class ImageManager : Singleton<ImageManager>
             case tileType.exit:
                 tile = exitTile;
                 break;
-            case tileType.spike:
-                tile = spikeTile;
+            case tileType.spike_0:
+                tile = spikeTile0;
+                break;
+            case tileType.spike_1:
+                tile = spikeTile1;
+                break;
+            case tileType.spike_2:
+                tile = spikeTile2;
+                break;
+            case tileType.spike_3:
+                tile = spikeTile3;
                 break;
         }
         return tile;

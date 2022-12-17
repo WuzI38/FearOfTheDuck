@@ -6,7 +6,10 @@ namespace Constants
         wall,
         start,
         exit,
-        spike,
+        spike_0,
+        spike_1,
+        spike_2,
+        spike_3,
     }
 
     // Id of every single gun

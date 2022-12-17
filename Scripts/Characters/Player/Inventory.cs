@@ -16,6 +16,7 @@ public class Inventory : PersistentSingleton<Inventory>
     }
     private Transform handTransform;
     private GameObject crosshair;
+    private bool isEnabled;
 
     protected override void Awake() { 
         base.Awake();
@@ -25,6 +26,13 @@ public class Inventory : PersistentSingleton<Inventory>
         handItemPrefab = null;
         handTransform = GameObject.FindGameObjectWithTag("Hand").transform;
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        isEnabled = true;
+        // Enable pausing the inventory
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    void Destroy() {
+        GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     public void AddItem(Gun item) {
@@ -39,6 +47,8 @@ public class Inventory : PersistentSingleton<Inventory>
     }
 
     public void RemoveItem() {
+        // If the game is paused DO NOT
+        if(!isEnabled) return;
         // Do not get rid of the item if there is no items in hand
         if(gunList.Count == 0) return;
         // Last item in hand is destroyed
@@ -59,6 +69,8 @@ public class Inventory : PersistentSingleton<Inventory>
     }
 
     public void SwapItem(int value) {
+        // If the game is paused DO NOT
+        if(!isEnabled) return;
         // Do not swap items if there is no item in hand
         if(gunList.Count == 0) return;
         int itemCount = gunList.Count;
@@ -82,6 +94,8 @@ public class Inventory : PersistentSingleton<Inventory>
     }
 
     public void RotateItem() {
+        // If the game is paused DO NOT
+        if(!isEnabled) return;
         // This may not be perfect but... that is enough
         Vector2 crosshairPos = crosshair.transform.position; 
         Vector2 handPos = handTransform.position;
@@ -113,5 +127,9 @@ public class Inventory : PersistentSingleton<Inventory>
             names.Add(type.ToString());
         }
         return names;
+    }
+    private void OnGameStateChanged(GameState newGameState) {
+        enabled = newGameState == GameState.Running;
+        isEnabled = newGameState == GameState.Running;
     }
 }

@@ -9,8 +9,19 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
     // that implements IEnumerable can be used with a for-each statement.
     // Invoke CreateTiles method with the arguments given above
     [SerializeField]
-    private Tilemap tilemap, wallTilemap;
+    private Tilemap tilemap, wallTilemap, spikeTilemap;
     private ImageManager Imanager;
+
+    protected override void Awake() {
+        base.Awake();
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        // Spikes are hidden at the beggining
+        spikeTilemap.GetComponent<TilemapCollider2D>().enabled = false;
+    }
+
+    void Destroy() {
+        GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
 
     public void Init() {
         Imanager = GameObject.FindGameObjectWithTag("ImageHandler").GetComponent<ImageManager>();
@@ -39,6 +50,17 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
     public void Clear() {
         tilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        spikeTilemap.ClearAllTiles();
+        // VERY BAD CODING PRACTICE DO NOT DUPLICATE
+        GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
+        foreach(GameObject chest in chests) {
+            try {
+                chest.GetComponent<ObjectDestroyer>().Destroy();
+            }
+            catch {
+                // Debug.Log("No chest currently in game");
+            }
+        }
     }
 
     // Paint a single wall tile
@@ -47,7 +69,7 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
     }
 
     public void CreateSpike(Vector2Int position) {
-        CreateTile(position, tilemap, Imanager.GetTile(tileType.spike));
+        CreateTile(position, spikeTilemap, Imanager.GetTile(tileType.spike_0));
     }
 
     public void CreateStart(Vector2Int position) {
@@ -56,5 +78,17 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
 
     public void CreateExit(Vector2Int position) {
         CreateTile(position, tilemap, Imanager.GetTile(tileType.exit));
+    }
+
+    private void switchSpikes() {
+        // Disable colliders, so you can move through spikes
+        spikeTilemap.GetComponent<TilemapCollider2D>().enabled = !spikeTilemap.GetComponent<TilemapCollider2D>().enabled;
+    }
+
+    private void OnGameStateChanged(GameState newGameState) {
+        if(newGameState == GameState.EnterRoom ||
+           newGameState == GameState.ClearRoom) {
+            switchSpikes();
+        }
     }
 }

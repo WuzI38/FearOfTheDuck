@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         verticalMove = Input.GetAxisRaw("Vertical") * runSpeed;
 
-        // Reduce movement speed if player moves diagonally
+        // Reduce movement speed if the player moves diagonally
         if(Mathf.Abs(horizontalMove) > 0 && Mathf.Abs(verticalMove) > 0) {
             float sqrt2 = Mathf.Sqrt(2);
             horizontalMove /= sqrt2;

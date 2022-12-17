@@ -76,7 +76,7 @@ public class CorridorBase : RandomWalkGenerator
         // Join room positions and corridor positions into one collection
         floorPos.UnionWith(roomTiles);
 
-        // Create spawn and exit tiles (position saved before during corridor generation)
+        // Create spawn and exit tiles (position saved before corridor generation)
         startExitPositions = StartAndExitPicker.CreateStartAndExit(floorPos, visualizer);
 
         // Visualize the dungeon
@@ -84,6 +84,9 @@ public class CorridorBase : RandomWalkGenerator
         
         // Do not generate walls on the floor, start, exit and spike tiles
         WallGenerator.CreateWalls(floorPos, visualizer, spikePositions, startExitPositions);
+
+        // Generate some chests containing items
+        ChestGenerator.GenerateChests(2, roomPositions, startExitPositions);
     }
 
     // Create full corridor layout

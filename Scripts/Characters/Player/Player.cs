@@ -10,6 +10,7 @@ public class Player : PersistentSingleton<Player>
     private Gun gun;
     private GameObject gunPrefab;
     private bool shooting;
+    private bool isEnabled;
     private const int MAXHEALTH = 3;
     override protected void Awake()
     {
@@ -19,6 +20,15 @@ public class Player : PersistentSingleton<Player>
         healthUI.SetStartingHealth(MAXHEALTH);
         gun = null;
         shooting = false;
+        // isEnabled is used instead of enabled, because I don't want to freeze GetMouseButtonUp/Down methods
+        isEnabled = true;
+        // Not inside wall is used to check if hand holding a gun is inside a wall, if so shooting is blocked
+        // Prevent the layer from shooting during pause
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    void Destroy() {
+        GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     public void AddToPlayerInventory(Gun item) {
@@ -62,16 +72,20 @@ public class Player : PersistentSingleton<Player>
 
         if(Input.GetKeyDown(KeyCode.R)) {
             // Do not reload while reloading to prevent the gun from spawning multiple bullets at once
-            if(gun != null && !gun.IsReloading) {
+            if(gun != null && !gun.IsReloading && isEnabled) {
                 gun.Reload();
             }
         }
 
         if(shooting) {
             // Check if shooting is possible
-            if(gun != null && gun.CanFire) {
+            if(gun != null && gun.CanFire && isEnabled) {
                 gun.Shoot();
             }
         }
+    }
+
+    private void OnGameStateChanged(GameState newGameState) {
+        isEnabled = newGameState == GameState.Running;
     }
 }
