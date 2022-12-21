@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
-    private TilemapVisualizer visualizer;
-
     public GameState state {get; private set;} // Store game's global state
     public delegate void GameStateChangeHandler(GameState newGameState);
     public event GameStateChangeHandler OnGameStateChanged;

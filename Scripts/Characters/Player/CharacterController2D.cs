@@ -6,7 +6,9 @@ public class CharacterController2D : MonoBehaviour
 	private float movementSmoothing = 0.05f;	// How much to smooth out the movement
 	private Rigidbody2D rigid; // For physics calculation
 	private bool facingRight = true;  // For determining which way the player is currently facing.
-	private Vector3 velocity = Vector3.zero; // Player's velocity
+	private Vector3 velocity = Vector3.zero;
+	private Vector2 targetVelocity;
+	public Vector2 Velocity {get;}
 	const float moveMult = 10f; // Multiply movement value by this constant
 	private Crosshair crosshair;
 	private BoxCollider2D col;
@@ -21,8 +23,11 @@ public class CharacterController2D : MonoBehaviour
 	private void Awake() {
 		rigid = GetComponent<Rigidbody2D>();
 		col = GetComponent<BoxCollider2D>();
-		crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<Crosshair>();
 		spriteRend = this.GetComponentInChildren<SpriteRenderer>();
+	}
+
+	void Start() {
+		crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<Crosshair>();
 	}
 
 	public void Move(float moveX, float moveY)
@@ -43,7 +48,7 @@ public class CharacterController2D : MonoBehaviour
 		}
 
 		// Move the character by finding the target velocity
-		Vector3 targetVelocity = new Vector2(moveX * moveMult, moveY * moveMult);
+		targetVelocity = new Vector2(moveX * moveMult, moveY * moveMult);
 		// And then smoothing it out and applying it to the character
 		rigid.velocity = Vector3.SmoothDamp(rigid.velocity, targetVelocity, ref velocity, movementSmoothing);
 

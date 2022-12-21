@@ -94,12 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2749280837287373270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b4f31672619f934ea6807434351026a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0179afeae2c333e4cbf9b8a076071ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 2176
+    m_Bits: 2432
 --- !u!50 &3792600149759155978
 Rigidbody2D:
   serializedVersion: 4

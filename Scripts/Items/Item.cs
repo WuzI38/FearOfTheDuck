@@ -1,4 +1,3 @@
-using UnityEngine;
 using Constants;
 
 // This script is really short, as all the items currently implemented are guns

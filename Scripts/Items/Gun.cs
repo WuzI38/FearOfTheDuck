@@ -4,7 +4,7 @@ using UnityEditor;
 
 // Abstract gun class for gun creation
 public abstract class Gun : Item {
-    protected float damage; // Amount of damage dealt
+    protected int damage; // Amount of damage dealt
     protected float spread; // Max angle between anticipated shooting direction and real shottting direction
     protected float reloadTime; // Amount of time to relaod a gun
     protected float bulletSpeed; // Speed of bullets the current gun is firing
@@ -69,7 +69,7 @@ public abstract class Gun : Item {
          // Initialize item on the given path
         string path = "Assets/Prefabs/Bullet.prefab";
         GameObject bullet = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
-        bullet = GameObject.Instantiate(bullet, muzzle.position, Quaternion.Euler(0, 0, 0)) as GameObject;
+        bullet = GameObject.Instantiate(bullet, muzzle.position, Quaternion.identity) as GameObject;
         Bullet bulletScript = bullet.GetComponent<Bullet>();
 
         // Find destination (crosshair's position), then normalize the vector

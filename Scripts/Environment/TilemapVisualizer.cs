@@ -14,9 +14,12 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
 
     protected override void Awake() {
         base.Awake();
-        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
         // Spikes are hidden at the beggining
         spikeTilemap.GetComponent<TilemapCollider2D>().enabled = false;
+    }
+
+    void Start() {
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     void Destroy() {

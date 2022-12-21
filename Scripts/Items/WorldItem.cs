@@ -16,7 +16,7 @@ public abstract class WorldItem : MonoBehaviour
     }
     protected Player playerScript;
     // Get the refernece to the player at the beginning of the game
-    protected void Awake() {
+    protected void Start() {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
     }

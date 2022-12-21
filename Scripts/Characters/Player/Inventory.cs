@@ -24,11 +24,14 @@ public class Inventory : PersistentSingleton<Inventory>
         handIndex = 0;
         handItem = null;
         handItemPrefab = null;
-        handTransform = GameObject.FindGameObjectWithTag("Hand").transform;
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         isEnabled = true;
+    }
+
+    void Start() {
         // Enable pausing the inventory
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        handTransform = GameObject.FindGameObjectWithTag("Hand").transform;
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
     }
 
     void Destroy() {

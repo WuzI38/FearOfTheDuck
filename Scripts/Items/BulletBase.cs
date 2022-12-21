@@ -1,33 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletBase : MonoBehaviour
 {
-    private Vector2 direction;
-    private float damage;
-    private bool initialized;
-    private Rigidbody2D rigid;
-    private float durability = 10;
+    protected Vector2 direction;
+    protected int damage;
+    protected bool initialized;
+    protected Rigidbody2D rigid;
+    protected float durability = 10;
     [SerializeField]
-    private LayerMask layerMask;
-    private Vector3 previousPosition;
-    private Vector3 currentPositionRayTo;
-    public void SetParams(Vector2 direction, float damage) {
+    protected LayerMask layerMask;
+    protected Vector3 previousPosition;
+    protected Vector3 currentPositionRayTo;
+    public void SetParams(Vector2 direction, int damage) {
         if(!initialized) {
             this.direction = direction;
             this.damage = damage;
         }
         initialized = true;
     }
-    void Awake()
+    protected void Awake()
     {
         initialized = false;
         rigid = GetComponent<Rigidbody2D>();
         previousPosition = rigid.position;
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if(initialized) {
             rigid.velocity = direction;
@@ -51,7 +49,7 @@ public class Bullet : MonoBehaviour
     }*/
 
     // Collision check
-    private void OnTriggerEnter2D(Collider2D collider2D) {
+    protected virtual void OnTriggerEnter2D(Collider2D collider2D) {
         // Remove an item if it hist a wall or a chest
         if(collider2D.tag == "Wall" || (collider2D.tag == "Chest" && !collider2D.isTrigger)) {
             Destroy(gameObject);

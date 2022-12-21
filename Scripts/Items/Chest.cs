@@ -10,15 +10,19 @@ public class Chest : MonoBehaviour
     protected Player playerScript;
     // Get the refernece to the player at the beginning of the game
     protected void Awake() {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
         itemNames = new List<string>();
-        playerScript = player.GetComponent<Player>();
         // Get the list of all posiible items
         foreach(string name in System.Enum.GetNames(typeof(itemType))) {
             if(name == "Null" || name == "Health") continue;
             itemNames.Add(name);
         }
     }
+
+    void Start() {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<Player>();
+    }
+
     // If the player enters the tile containing chest enable picking the chest and disable if the player leaves that tile
     protected virtual void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")) {

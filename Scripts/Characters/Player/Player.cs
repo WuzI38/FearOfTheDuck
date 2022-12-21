@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Constants;
 
 public class Player : PersistentSingleton<Player>
 {
@@ -24,6 +22,9 @@ public class Player : PersistentSingleton<Player>
         isEnabled = true;
         // Not inside wall is used to check if hand holding a gun is inside a wall, if so shooting is blocked
         // Prevent the layer from shooting during pause
+    }
+
+    void Start() {
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
