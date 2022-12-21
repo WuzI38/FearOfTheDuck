@@ -9,9 +9,16 @@ public class CorridorBase : RandomWalkGenerator
     // very long dungeons (cause they are boring pffff) 
     [SerializeField]
     private CorridorGenParams corridorParams;
+    private EnemySpawner enemySpawner;
+    private PlayerSpawner playerSpawner;
 
     protected override void Generate() {
         CorridorBaseGeneration();
+    }
+
+    void Awake() {
+        enemySpawner = transform.GetComponent<EnemySpawner>();
+        playerSpawner = transform.GetComponent<PlayerSpawner>();
     }
 
     // This is the main generator, it creates the whole dungeon so... I guess it is pretty important
@@ -23,6 +30,7 @@ public class CorridorBase : RandomWalkGenerator
         List<Vector2Int> roomPositions = new List<Vector2Int>();
         HashSet<Vector2Int> spikePositions = new HashSet<Vector2Int>();
         HashSet<Vector2Int> startExitPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> chestPositions = new HashSet<Vector2Int>();
     
         bool flag = false;
         int funkyFormula = (int)Mathf.Ceil(Mathf.Sqrt((float)corridorParams.roomCount / corridorParams.roomSquarePercent));
@@ -86,7 +94,10 @@ public class CorridorBase : RandomWalkGenerator
         WallGenerator.CreateWalls(floorPos, visualizer, spikePositions, startExitPositions);
 
         // Generate some chests containing items
-        ChestGenerator.GenerateChests(2, roomPositions, startExitPositions);
+        chestPositions = ChestGenerator.GenerateChests(2, roomPositions, startExitPositions);
+
+        // Set the remaining rooms as rooms containing enemies
+
     }
 
     // Create full corridor layout

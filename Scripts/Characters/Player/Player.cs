@@ -9,13 +9,12 @@ public class Player : PersistentSingleton<Player>
     private GameObject gunPrefab;
     private bool shooting;
     private bool isEnabled;
-    private const int MAXHEALTH = 3;
     override protected void Awake()
     {
         base.Awake();
         inventory = gameObject.AddComponent<Inventory>();
         healthUI = gameObject.AddComponent<HealthUI>(); 
-        healthUI.SetStartingHealth(MAXHEALTH);
+        // Set starting health to player's max health
         gun = null;
         shooting = false;
         // isEnabled is used instead of enabled, because I don't want to freeze GetMouseButtonUp/Down methods
@@ -26,6 +25,7 @@ public class Player : PersistentSingleton<Player>
 
     void Start() {
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        healthUI.DisplayStartingHealth();
     }
 
     void Destroy() {
@@ -38,6 +38,9 @@ public class Player : PersistentSingleton<Player>
 
     public void GainHealth(int amount) {
         healthUI.GainHealth(amount);
+    }
+    public void LoseHealth(int amount) {
+        healthUI.LoseHealth(amount);
     }
 
     public List<string> GetInventoryAsString() {

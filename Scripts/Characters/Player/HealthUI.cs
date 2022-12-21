@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    private int startingHealth;
+    public const int MAX_HEALTH = 3;
     private int currentHealth;
     public int CurrentHealth {
         get => currentHealth;
@@ -11,32 +11,23 @@ public class HealthUI : MonoBehaviour
     private GameObject lifeContainer;
     private Sprite empty;
     private Sprite full;
-    public int StartingHealth {
-        get => startingHealth;
-        set {
-            if(startingHealth < 0 && value > 0) {
-                startingHealth = value;
-            }
-        }
-    }
     void Awake()
     {
-        startingHealth = -1;
         lifeContainer = GameObject.FindGameObjectWithTag("Life");
+        currentHealth = MAX_HEALTH;
         // Load images
         empty = Resources.Load <Sprite>("Images/UI/heart_empty");
         full = Resources.Load <Sprite>("Images/UI/heart");
     }
 
-    public void SetStartingHealth(int amount) {
-        startingHealth = amount;
-        currentHealth = startingHealth;
+    public void DisplayStartingHealth() {
         // Set every health container image to full
+        int startingHealth = MAX_HEALTH;
         foreach(Transform child in lifeContainer.transform) {
             Sprite currentSprite;
-            if(amount > 0) {
+            if(startingHealth > 0) {
                 currentSprite = full;
-                amount--;
+                startingHealth--;
             }
             else {
                 currentSprite = empty;
@@ -46,8 +37,8 @@ public class HealthUI : MonoBehaviour
     }
 
     public void GainHealth(int amount) {
-        // Gain health only if you 
-        amount = Mathf.Min(currentHealth + amount, startingHealth) - currentHealth;
+        // Gain health only if you are not on max healthstate
+        amount = Mathf.Min(currentHealth + amount, MAX_HEALTH) - currentHealth;
         currentHealth += amount;
         foreach(Transform child in lifeContainer.transform) {
             Sprite spr = child.GetComponent<Image>().sprite;
@@ -64,6 +55,7 @@ public class HealthUI : MonoBehaviour
     }
 
     public void LoseHealth(int amount) {
+        // Lose the amount of hp equal to the damage, if currentHealth == 0 kill the player
         amount = Mathf.Min(amount, currentHealth);
         currentHealth -= amount;
         foreach(Transform child in lifeContainer.transform) {
@@ -77,6 +69,9 @@ public class HealthUI : MonoBehaviour
             else {
                 break;
             }
+        }
+        if(currentHealth == 0) {
+            Debug.Log("Ur Dead");
         }
     }
 }

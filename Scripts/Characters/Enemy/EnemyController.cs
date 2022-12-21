@@ -23,8 +23,6 @@ public class EnemyController : MonoBehaviour
     private bool canAttack;
     private Animator animator;
     private Transform beak;
-    [SerializeField] 
-    LayerMask mask;
     // Start is called before the first frame update
     void Awake() {
         speed = enemyParams.speed;
@@ -33,6 +31,7 @@ public class EnemyController : MonoBehaviour
         minDistance = enemyParams.minDistance;
         health = enemyParams.health;
         range = enemyParams.range;
+        bulletSpeed = enemyParams.bulletSpeed;
         facingRight = false;
         canAttack = true;
         animator = gameObject.GetComponent<Animator>();
@@ -75,12 +74,9 @@ public class EnemyController : MonoBehaviour
         if(transform.position.x > player.transform.position.x && facingRight) Flip();
 
         // Check if attack makes any sense (player in range)
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position, range, mask);
-        if(Physics2D.Raycast(transform.position, player.transform.position, range, mask)) Debug.Log(hit.transform.tag);
-        /*if(hit.transform.tag == "Player" && canAttack) { // Player in range
-            // If so perform an attack
+        if(Vector2.Distance(transform.position, player.transform.position) <= range && canAttack) {
             PerformAttack();
-        }*/
+        }
     }
 
     private void Flip()
@@ -107,15 +103,14 @@ public class EnemyController : MonoBehaviour
         animator.Play("EnemyAttack");
         canAttack = false;
         // Same as gun - instantiate a bullet + shoot it at player's position
-        string path = "Assets/Prefabs/Bullet.prefab";
+        string path = "Assets/Prefabs/BulletEnemy.prefab";
         GameObject bullet = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
         bullet = GameObject.Instantiate(bullet, beak.position, Quaternion.identity) as GameObject;
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
         // Calcualte bullet's direction
-        Vector2 direction = (player.transform.position - new Vector3(beak.position.x, beak.position.y)).normalized;
+        Vector2 direction = (new Vector2(player.transform.position.x, player.transform.position.y) - new Vector2(beak.position.x, beak.position.y)).normalized;
         direction = direction * bulletSpeed * Time.fixedDeltaTime;
 
-        Debug.Log("XD");
         bulletScript.SetParams(direction, damage);
             
         StartCoroutine(ShootDelay());

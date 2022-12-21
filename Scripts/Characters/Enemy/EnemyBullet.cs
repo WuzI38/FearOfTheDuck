@@ -8,9 +8,8 @@ public class EnemyBullet : BulletBase
         if(collider2D.tag == "Wall" || (collider2D.tag == "Chest" && !collider2D.isTrigger)) {
             Destroy(gameObject);
         }
-        if(collider2D.tag == "Wall") {
-            HealthUI controller = collider2D.transform.GetComponent<HealthUI>();
-            // By accident I've set the function's parameter to float whichc is stupid, but I have no motivation to change that
+        if(collider2D.tag == "Player") {
+            Player controller = collider2D.transform.GetComponent<Player>();
             controller.LoseHealth(damage);
             Destroy(gameObject);
         }

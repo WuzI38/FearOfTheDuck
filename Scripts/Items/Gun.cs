@@ -93,7 +93,7 @@ public abstract class Gun : Item {
 
         direction = Quaternion.AngleAxis(extraRotation, Vector3.forward) * direction;
 
-        // Custom method for button init must be created, as it is a MonoBehaviour, so it can't have constructor
+        // Custom method for bullet init must be created, as it is a MonoBehaviour, so it can't have a constructor
         bulletScript.SetParams(direction, damage);
     }
 

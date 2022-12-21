@@ -11917,9 +11917,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyParams: {fileID: 11400000, guid: d9b98f741d9d5d148bc350e2bb9785e4, type: 2}
-  mask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!212 &436754896
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13880,7 +13877,6 @@ GameObject:
   - component: {fileID: 1600212769}
   - component: {fileID: 1600212770}
   - component: {fileID: 1600212768}
-  - component: {fileID: 1600212772}
   - component: {fileID: 1600212771}
   - component: {fileID: 1600212767}
   - component: {fileID: 1600212773}
@@ -14043,18 +14039,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1600212772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600212764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab8af6f0b4134264aac132f5ae238632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1600212773
 BoxCollider2D:
   m_ObjectHideFlags: 0

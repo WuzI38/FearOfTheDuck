@@ -9,12 +9,12 @@ public static class ChestGenerator
         get => chestPos;
     }
     private static HashSet<GameObject> chestList = null;
-    public static void GenerateChests(int chests, List<Vector2Int> roomPos, HashSet<Vector2Int> startExitPos) {
+    public static HashSet<Vector2Int> GenerateChests(int chests, List<Vector2Int> roomPos, HashSet<Vector2Int> startExitPos) {
         // Pick random positions for each of x chests (num of chests given as parameter)
         // Make sure those positions are not identical and are not start nor exit positions as it makes no sense
         chestPos = new HashSet<Vector2Int>();
         chestList = new HashSet<GameObject>();
-        if(chests > roomPos.Count - startExitPos.Count) return;
+        if(chests > roomPos.Count - startExitPos.Count) return null;
         while(chests > 0) {
             Vector2Int pos = roomPos[Random.Range(0, roomPos.Count)];
             if(!startExitPos.Contains(pos) && !chestPos.Contains(pos)) {
@@ -31,6 +31,8 @@ public static class ChestGenerator
             chest.AddComponent<ObjectDestroyer>();
             chestList.Add(chest);
         }
+
+        return chestPos;
     }
 
     public static void DestroyChests() {
