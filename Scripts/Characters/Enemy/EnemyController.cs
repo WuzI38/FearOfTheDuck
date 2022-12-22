@@ -90,7 +90,11 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage) {
         health -= damage;
-        if(health <= 0) Destroy(this.gameObject);
+        if(health <= 0) {
+            // Send message to objective class that one less enemy must be killed
+            Objective.EnemyKilled();
+            Destroy(this.gameObject);
+        }
     }
 
     private IEnumerator ShootDelay() {

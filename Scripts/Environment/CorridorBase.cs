@@ -93,11 +93,13 @@ public class CorridorBase : RandomWalkGenerator
         // Do not generate walls on the floor, start, exit and spike tiles
         WallGenerator.CreateWalls(floorPos, visualizer, spikePositions, startExitPositions);
 
+        // Spawn player
+
         // Generate some chests containing items
         chestPositions = ChestGenerator.GenerateChests(2, roomPositions, startExitPositions);
 
         // Set the remaining rooms as rooms containing enemies
-
+        enemySpawner.SetSpawnPositions(roomPositions, startExitPositions, chestPositions);
     }
 
     // Create full corridor layout

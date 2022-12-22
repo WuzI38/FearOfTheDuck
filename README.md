@@ -6,18 +6,18 @@ I've decided to divide it into categories, cause there is a lot of stuff to do
 
 # TODO:
 ## Player:
-* Loosing health
 * Spawning player
 
 ## Items:
 
 ## Dungeon:
 * Implement spikes + player whereabouts detection
-* Implement player spawning and level finishing
+* Implement level finishing
+* Open exit if enough enemies were killed
 
 ## Enemies:
-* Add enemy interacting with the player (for example shooting) (IN PROGRESS)
 * Implement spawning enemies
+* Count dead enemies and remaining enemies
 
 ## Other:
 * Add sounds to particular actions + collect the remaining sounds
