@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   Description: Rifle - high damage and reload time and delay between shots
-  damage: 20
-  spread: 5
-  reloadTime: 3
+  damage: 200
+  spread: 0
+  reloadTime: 0.01
   bulletSpeed: 400
-  delay: 0.5
-  maxAmmo: 15
+  delay: 0.1
+  maxAmmo: 1000

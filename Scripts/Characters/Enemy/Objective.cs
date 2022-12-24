@@ -23,9 +23,17 @@ public static class Objective {
         enemiesToBeat -= 1;
         if(enemiesInRoom > 1) enemiesInRoom -= 1;
         else {
-            // Change game state to running
-            ;
+            // If the last enemy was killed enable leaving the room
+            enemiesInRoom -= 1;
+            GameState state = GameManager.Instance.state;
+            GameManager.Instance.ChangeState(GameState.ClearRoom);
         }
-        if(enemiesToBeat <= 0) completed = true; 
+        if(enemiesToBeat <= 0) {
+            GameState state = GameManager.Instance.state;
+            GameManager.Instance.ChangeState(GameState.Completed);
+            completed = true; 
+        }
+        /*Debug.Log("Enemies remaining " + enemiesToBeat);
+        Debug.Log("Enemies in room " + enemiesInRoom);*/
     }
 }

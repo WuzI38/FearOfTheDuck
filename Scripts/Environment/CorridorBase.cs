@@ -11,6 +11,7 @@ public class CorridorBase : RandomWalkGenerator
     private CorridorGenParams corridorParams;
     private EnemySpawner enemySpawner;
     private PlayerSpawner playerSpawner;
+    private bool previewMode = true;
 
     protected override void Generate() {
         CorridorBaseGeneration();
@@ -19,6 +20,8 @@ public class CorridorBase : RandomWalkGenerator
     void Awake() {
         enemySpawner = transform.GetComponent<EnemySpawner>();
         playerSpawner = transform.GetComponent<PlayerSpawner>();
+        // In preview mode spawn dungeon only 
+        previewMode = false;
     }
 
     // This is the main generator, it creates the whole dungeon so... I guess it is pretty important
@@ -94,12 +97,13 @@ public class CorridorBase : RandomWalkGenerator
         WallGenerator.CreateWalls(floorPos, visualizer, spikePositions, startExitPositions);
 
         // Spawn player
+        if(!previewMode) playerSpawner.SpawnPlayer(StartAndExitPicker.StartPos);
 
         // Generate some chests containing items
         chestPositions = ChestGenerator.GenerateChests(2, roomPositions, startExitPositions);
 
         // Set the remaining rooms as rooms containing enemies
-        enemySpawner.SetSpawnPositions(roomPositions, startExitPositions, chestPositions);
+        if(!previewMode) enemySpawner.SetSpawnPositions(roomPositions, startExitPositions, chestPositions);
     }
 
     // Create full corridor layout

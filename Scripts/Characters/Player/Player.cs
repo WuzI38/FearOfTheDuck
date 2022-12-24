@@ -87,6 +87,17 @@ public class Player : PersistentSingleton<Player>
                 gun.Shoot();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.E) && Objective.Completed) {
+            float size = gameObject.GetComponent<SpriteRenderer>().size.x / 2;
+            Vector2 exitPos = StartAndExitPicker.ExitPos;
+            Vector2 exitPosNew = new Vector2(size + exitPos.x * size * 2, size + exitPos.y * size * 2);
+            if(Vector2.Distance(exitPosNew, gameObject.transform.position) <= 1) {
+                GameState state = GameManager.Instance.state;
+                GameManager.Instance.ChangeState(GameState.Finish);
+            }
+        }
+        
     }
 
     private void OnGameStateChanged(GameState newGameState) {

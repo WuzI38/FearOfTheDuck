@@ -20,27 +20,35 @@ public class GameManager : Singleton<GameManager>
         OnGameStateChanged?.Invoke(newState);
         
         switch(newState) {
-            case GameState.Generation: // (not implemented)
+            case GameState.Generation:
+            // Generate the whole dungeon and spawn player
+                AbstractDungeonGenerator generator = GameObject.FindGameObjectWithTag("Generator").GetComponent<AbstractDungeonGenerator>();
+                generator.GenerateDungeon();
+                GameManager.Instance.ChangeState(GameState.Running);
                 break;
-            case GameState.SpawnHero: // (not implemented)
-                // Spawn hero, give him starting equipment, set base stats
-                break;
-            case GameState.Running: // (not implemented)
-                // The game is running 
+            case GameState.Running:
                 Time.timeScale = 1;
                 break;
-            case GameState.EnterRoom: // (not implemented)
-                // Spawn enemies, save the number of enemies to kill before leaving the room, close the exits
+            case GameState.EnterRoom: 
+                // After entering the room spimply raise the spikes, spawn enemies (enemy spawner script) and come back to Game.Running
+                GameManager.Instance.ChangeState(GameState.Running);
                 break;
-            case GameState.ClearRoom: // (not implemented)
-                // Open the exits, give player reward (optional)
+            case GameState.ClearRoom: 
+                // After the room was cleared and all of the enemies were killed spimply lower the spikes and come back to Game.Running
+                GameManager.Instance.ChangeState(GameState.Running);
                 break;
-            case GameState.Pause: // (not implemented)
-                // The game is paused
+            case GameState.Pause: // The game is paused
                 Time.timeScale = 0;
                 break;
-            case GameState.Death: // (not implemented)
-                // Show ending screen, return to menu
+            case GameState.Finish: // Player won the game
+                Time.timeScale = 0;
+                break;
+            case GameState.Death: // Player died
+                Time.timeScale = 0;
+                break;
+            case GameState.Completed: 
+                // Not implemented the objective was completed, so the exit must be opened
+                GameManager.Instance.ChangeState(GameState.Running);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -49,17 +57,13 @@ public class GameManager : Singleton<GameManager>
 }
 
 public enum GameState {
-    Generation = 0,
-    SpawnHero = 1,
-    Running = 2,
-    EnterRoom = 3,
-    ClearRoom = 4,
-    Pause = 5,
-    Death = 6,
-    None = 7 // Empty state
+    Generation,
+    Running,
+    EnterRoom,
+    ClearRoom,
+    Pause,
+    Death,
+    Finish,
+    Completed,
+    None // Empty state
 }
-
-/*GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-private void OnGameStateChanged(GameState newGameState) {
-        enabled = newGameState == GameState.Running;
-    }*/

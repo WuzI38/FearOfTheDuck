@@ -4,6 +4,11 @@ using UnityEngine;
 public static class SpikeGenerator
 {
     private static HashSet<Vector2Int> spikePos = new HashSet<Vector2Int>();
+    public static HashSet<Vector2Int> SpikePositions {
+        get {
+            return spikePos.Count > 0 ? spikePos : null;
+        }
+    }
     // Create spikes blocking the path if there are remaining enemies in the room
     public static HashSet<Vector2Int> CreateSpikes(List<Vector2Int> roomPos, HashSet<Vector2Int> floorPos, TilemapVisualizer visualizer, int corridorLen) {
         int roomSize = Helpers.Utils.CalculateMaxRoomSize(corridorLen);

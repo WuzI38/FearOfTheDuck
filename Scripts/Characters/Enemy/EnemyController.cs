@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
         range = enemyParams.range;
         bulletSpeed = enemyParams.bulletSpeed;
         facingRight = false;
-        canAttack = true;
+        canAttack = false;
         animator = gameObject.GetComponent<Animator>();
         beak = gameObject.GetComponentInChildren<Transform>();
     }
@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRend = this.GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+        StartCoroutine(ShootDelay());
     }
 
     // Update is called once per frame
@@ -93,6 +94,12 @@ public class EnemyController : MonoBehaviour
         if(health <= 0) {
             // Send message to objective class that one less enemy must be killed
             Objective.EnemyKilled();
+            // Spawn health container (0.05% chance)
+            if(Random.Range(0, 20) == 0) {
+                string path = "Assets/Prefabs/HealthWorldItem.prefab";
+                GameObject healthPrefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+                Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            }
             Destroy(this.gameObject);
         }
     }

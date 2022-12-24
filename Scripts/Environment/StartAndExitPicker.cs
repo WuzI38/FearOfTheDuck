@@ -25,7 +25,7 @@ public static class StartAndExitPicker
         // Visualize start and exit tiles
         if(floorPos.Contains(exitPos)) {
             floorPos.Remove(exitPos);
-            visualizer.CreateExit(exitPos);
+            visualizer.CreateStart(exitPos);
             sae.Add(exitPos);
         }
         // Create 4 spawn tiles

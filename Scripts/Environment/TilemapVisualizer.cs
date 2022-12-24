@@ -75,6 +75,10 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
         CreateTile(position, spikeTilemap, Imanager.GetTile(tileType.spike_0));
     }
 
+    public void CreateSpikeRaised(Vector2Int position) {
+        CreateTile(position, spikeTilemap, Imanager.GetTile(tileType.spike_3));
+    }
+
     public void CreateStart(Vector2Int position) {
         CreateTile(position, tilemap, Imanager.GetTile(tileType.start));
     }
@@ -83,15 +87,23 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
         CreateTile(position, tilemap, Imanager.GetTile(tileType.exit));
     }
 
-    private void switchSpikes() {
+    private void switchSpikes(GameState currentGameState) {
         // Disable colliders, so you can move through spikes
         spikeTilemap.GetComponent<TilemapCollider2D>().enabled = !spikeTilemap.GetComponent<TilemapCollider2D>().enabled;
+        foreach(Vector2Int pos in SpikeGenerator.SpikePositions) {
+            if(currentGameState == GameState.EnterRoom) CreateSpikeRaised(pos);
+            else CreateSpike(pos);
+        }
     }
 
     private void OnGameStateChanged(GameState newGameState) {
         if(newGameState == GameState.EnterRoom ||
            newGameState == GameState.ClearRoom) {
-            switchSpikes();
+            switchSpikes(newGameState);
+        }
+        if(newGameState == GameState.Completed) {
+            // Open the exit after the objective was completed
+            CreateExit(StartAndExitPicker.ExitPos);
         }
     }
 }

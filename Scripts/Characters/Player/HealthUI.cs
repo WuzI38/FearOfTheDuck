@@ -70,8 +70,9 @@ public class HealthUI : MonoBehaviour
                 break;
             }
         }
-        if(currentHealth == 0) {
-            Debug.Log("Ur Dead");
+        if(currentHealth <= 0) {
+            GameState state = GameManager.Instance.state;
+            GameManager.Instance.ChangeState(GameState.Death);
         }
     }
 }

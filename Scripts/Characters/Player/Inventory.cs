@@ -20,6 +20,8 @@ public class Inventory : PersistentSingleton<Inventory>
 
     protected override void Awake() { 
         base.Awake();
+        // handtransform must be initialized in awake as starting inventory is given to the player by the spawner before Start is called
+        handTransform = GameObject.FindGameObjectWithTag("Hand").transform;
         gunList = new List<Gun>();
         handIndex = 0;
         handItem = null;
@@ -30,7 +32,6 @@ public class Inventory : PersistentSingleton<Inventory>
     void Start() {
         // Enable pausing the inventory
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        handTransform = GameObject.FindGameObjectWithTag("Hand").transform;
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
     }
 
