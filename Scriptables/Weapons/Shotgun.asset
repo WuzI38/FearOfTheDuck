@@ -15,7 +15,7 @@ MonoBehaviour:
   Description: Shotgun - multiple bullets with low damage
   damage: 5
   spread: 10
-  reloadTime: 2
+  reloadTime: 1.5
   bulletSpeed: 350
   delay: 0.4
   maxAmmo: 5

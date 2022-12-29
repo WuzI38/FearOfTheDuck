@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class Inventory : PersistentSingleton<Inventory>
 {
@@ -90,8 +89,8 @@ public class Inventory : PersistentSingleton<Inventory>
 
     void InstantiatePrefab(Gun item) {
         // Create prefab from the prefab folder
-        string path = "Assets/Prefabs/" + item.Type.ToString() + ".prefab";
-        handItemPrefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+        string path = "Prefabs/" + item.Type.ToString();
+        handItemPrefab = Resources.Load(path, typeof(GameObject)) as GameObject;
         handItem = item;
         float offset = handItemPrefab.transform.localScale.z * 0.5f;
         handItemPrefab = GameObject.Instantiate(handItemPrefab, handTransform.position, handTransform.rotation, handTransform) as GameObject;

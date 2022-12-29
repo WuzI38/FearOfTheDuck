@@ -7,6 +7,7 @@ public static class Objective {
     private static int enemiesInRoom = 0;
     private static int enemiesToBeat = 30;
     private static bool completed = false;
+    private static bool stateEnter = true; // Used to prevent the game from double state change
 
     public static bool Completed {
         get => completed;
@@ -14,6 +15,7 @@ public static class Objective {
     
     // Spawn a random number of enemies in a room
     public static int GetNumberOfEnemiesToSpawn() {
+        stateEnter = false;
         enemiesInRoom = Random.Range(minEnemiesInRoom, maxEnemiesInRoom);
         return enemiesInRoom;
     }
@@ -25,8 +27,11 @@ public static class Objective {
         else {
             // If the last enemy was killed enable leaving the room
             enemiesInRoom -= 1;
-            GameState state = GameManager.Instance.state;
-            GameManager.Instance.ChangeState(GameState.ClearRoom);
+            if(!stateEnter) {
+                GameState state = GameManager.Instance.state;
+                GameManager.Instance.ChangeState(GameState.ClearRoom);
+                stateEnter = true;
+            }
         }
         if(enemiesToBeat <= 0) {
             GameState state = GameManager.Instance.state;

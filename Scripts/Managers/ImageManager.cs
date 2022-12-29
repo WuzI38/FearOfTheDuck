@@ -27,6 +27,8 @@ public class ImageManager : Singleton<ImageManager>
 
     [SerializeField]
     private TileBase exitTile;
+    [SerializeField]
+    private TileBase middleTile;
 
     [SerializeField]
     private Sprite healthSmall;
@@ -63,6 +65,9 @@ public class ImageManager : Singleton<ImageManager>
                 break;
             case tileType.spike_3:
                 tile = spikeTile3;
+                break;
+            case tileType.middle:
+                tile = middleTile;
                 break;
         }
         return tile;

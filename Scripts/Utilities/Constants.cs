@@ -10,6 +10,7 @@ namespace Constants
         spike_1,
         spike_2,
         spike_3,
+        middle,
     }
 
     // Id of every single gun

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMove = 0f;
     private float verticalMove = 0f;
     [SerializeField] 
-    private float runSpeed = 25f;
+    private float runSpeed = 30f;
 
     void Update()
     {

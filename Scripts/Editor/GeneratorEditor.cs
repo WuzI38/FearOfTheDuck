@@ -1,3 +1,4 @@
+# if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 // The purpose of this script is to create a custom button
@@ -22,3 +23,4 @@ public class GeneratorEditor : Editor
         }
     }
 }
+# endif

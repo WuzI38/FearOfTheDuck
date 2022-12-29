@@ -18,7 +18,6 @@ public class EndingScreenController : MonoBehaviour
         txt.enabled = false;
         // Enabled doesn't work with image, you have to disable the whole image component
         img.gameObject.SetActive(false);
-        Debug.Log(img);
     }
 
     private void OnGameStateChanged(GameState newGameState) {

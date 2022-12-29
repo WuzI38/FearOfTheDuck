@@ -10,6 +10,7 @@ public class Shotgun : Gun
         // You cannot shoot while reloading or if you have no ammo
         if(!canFire) return;
         if(currentAmmo == 0) {
+            AudioManager.FindObjectOfType<AudioManager>().Play("Reload");
             Reload();
             return;
         }
@@ -21,7 +22,7 @@ public class Shotgun : Gun
         for(float x = -(spread*2); x <= (spread*2); x += spread) {
             InstantiateBullet(x);
         }
-        
+        AudioManager.FindObjectOfType<AudioManager>().Play("Shot");
         player.StartCoroutine(ShootDelay());
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEditor;
 
 // Abstract gun class for gun creation
 public abstract class Gun : Item {
@@ -42,12 +41,14 @@ public abstract class Gun : Item {
         currentAmmo = maxAmmo;
         // FindObjectOfType<AudioManager>().Play("Reload");
         // Block shooting for some time necessary for the player to reload
+        AudioManager.FindObjectOfType<AudioManager>().Play("Reload");
         player.StartCoroutine(ReloadDelay());
     }
     public virtual void Shoot() {
         // You cannot shoot while reloading or if you have no ammo
         if(!canFire) return;
         if(currentAmmo == 0) {
+            AudioManager.FindObjectOfType<AudioManager>().Play("Reload");
             Reload();
             return;
         }
@@ -57,7 +58,7 @@ public abstract class Gun : Item {
 
         // Wait for some amount of time given in the gunParams object
         InstantiateBullet();
-        
+        AudioManager.FindObjectOfType<AudioManager>().Play("Shot");
         player.StartCoroutine(ShootDelay());
     }
 
@@ -67,8 +68,8 @@ public abstract class Gun : Item {
         muzzle = GameObject.FindGameObjectWithTag("Muzzle").transform;
         if(muzzle == null) return;
          // Initialize item on the given path
-        string path = "Assets/Prefabs/Bullet.prefab";
-        GameObject bullet = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+        string path = "Prefabs/Bullet";
+        GameObject bullet = Resources.Load(path, typeof(GameObject)) as GameObject;
         bullet = GameObject.Instantiate(bullet, muzzle.position, Quaternion.identity) as GameObject;
         Bullet bulletScript = bullet.GetComponent<Bullet>();
 

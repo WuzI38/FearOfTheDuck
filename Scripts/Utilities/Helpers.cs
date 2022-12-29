@@ -88,6 +88,3 @@ namespace Helpers
         }
     }
 }
-
-// Get player's velocity (I don't know, maybe calculating positions will be easier thanks to that)
-//Vector2 playerSpeed = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().velocity;

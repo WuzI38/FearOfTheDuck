@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -96,8 +95,8 @@ public class EnemyController : MonoBehaviour
             Objective.EnemyKilled();
             // Spawn health container (0.05% chance)
             if(Random.Range(0, 20) == 0) {
-                string path = "Assets/Prefabs/HealthWorldItem.prefab";
-                GameObject healthPrefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+                string path = "Prefabs/HealthWorldItem";
+                GameObject healthPrefab = Resources.Load(path, typeof(GameObject)) as GameObject;
                 Instantiate(healthPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             }
             Destroy(this.gameObject);
@@ -114,8 +113,8 @@ public class EnemyController : MonoBehaviour
         animator.Play("EnemyAttack");
         canAttack = false;
         // Same as gun - instantiate a bullet + shoot it at player's position
-        string path = "Assets/Prefabs/BulletEnemy.prefab";
-        GameObject bullet = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+        string path = "Prefabs/BulletEnemy";
+        GameObject bullet = Resources.Load(path, typeof(GameObject)) as GameObject;
         bullet = GameObject.Instantiate(bullet, beak.position, Quaternion.identity) as GameObject;
         EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
         // Calcualte bullet's direction

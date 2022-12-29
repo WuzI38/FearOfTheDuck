@@ -33,6 +33,9 @@ public class TilemapVisualizer : Singleton<TilemapVisualizer>
     public void CreateFloorTiles(IEnumerable<Vector2Int> floorPos) {
         CreateTiles(floorPos, tilemap, Imanager.GetTile((int)tileType.floor));
     }
+    public void CreateMiddleTiles(IEnumerable<Vector2Int> floorPos) {
+        CreateTiles(floorPos, tilemap, Imanager.GetTile(tileType.middle));
+    }
 
     private void CreateTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile) {
         // Create the whole tilemap (floor tiles only)

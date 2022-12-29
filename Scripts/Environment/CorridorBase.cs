@@ -31,6 +31,7 @@ public class CorridorBase : RandomWalkGenerator
         HashSet<Vector2Int> potentialRoomPos = new HashSet<Vector2Int>();
         List<Vector2Int> deadEnds = new List<Vector2Int>();
         List<Vector2Int> roomPositions = new List<Vector2Int>();
+        List<Vector2Int> middleTiles = new List<Vector2Int>();
         HashSet<Vector2Int> spikePositions = new HashSet<Vector2Int>();
         HashSet<Vector2Int> startExitPositions = new HashSet<Vector2Int>();
         HashSet<Vector2Int> chestPositions = new HashSet<Vector2Int>();
@@ -103,7 +104,11 @@ public class CorridorBase : RandomWalkGenerator
         chestPositions = ChestGenerator.GenerateChests(2, roomPositions, startExitPositions);
 
         // Set the remaining rooms as rooms containing enemies
-        if(!previewMode) enemySpawner.SetSpawnPositions(roomPositions, startExitPositions, chestPositions);
+        if(!previewMode) {
+            middleTiles = enemySpawner.SetSpawnPositions(roomPositions, startExitPositions, chestPositions);
+            // Mark the middle tiles of each room
+            visualizer.CreateMiddleTiles(middleTiles);
+        }
     }
 
     // Create full corridor layout

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Constants;
-using UnityEditor;
 
 public class Chest : MonoBehaviour
 {
@@ -58,8 +57,8 @@ public class Chest : MonoBehaviour
                 }
             }
             // Choose a random item not currently in the inventory
-            path = "Assets/Prefabs/" + randItem + "WorldItem.prefab";
-            GameObject worldItem = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+            path = "Prefabs/" + randItem + "WorldItem";
+            GameObject worldItem = Resources.Load(path, typeof(GameObject)) as GameObject;
             // Instantiate the item + remove the chest
             Instantiate(worldItem, transform.position, transform.rotation);
             Destroy(gameObject);

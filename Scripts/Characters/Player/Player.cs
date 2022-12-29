@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Player : PersistentSingleton<Player>
 {
@@ -9,6 +10,8 @@ public class Player : PersistentSingleton<Player>
     private GameObject gunPrefab;
     private bool shooting;
     private bool isEnabled;
+    private bool immortal;
+    private float immortalTime;
     override protected void Awake()
     {
         base.Awake();
@@ -21,6 +24,8 @@ public class Player : PersistentSingleton<Player>
         isEnabled = true;
         // Not inside wall is used to check if hand holding a gun is inside a wall, if so shooting is blocked
         // Prevent the layer from shooting during pause
+        immortal = false; // Used to block damage after the player takes a hit
+        immortalTime = 0.5f;
     }
 
     void Start() {
@@ -40,7 +45,11 @@ public class Player : PersistentSingleton<Player>
         healthUI.GainHealth(amount);
     }
     public void LoseHealth(int amount) {
-        healthUI.LoseHealth(amount);
+        if(!immortal) {
+            healthUI.LoseHealth(amount);
+            immortal = true;
+            StartCoroutine(Immortality());
+        }
     }
 
     public List<string> GetInventoryAsString() {
@@ -102,5 +111,11 @@ public class Player : PersistentSingleton<Player>
 
     private void OnGameStateChanged(GameState newGameState) {
         isEnabled = newGameState == GameState.Running;
+    }
+
+    private IEnumerator Immortality() {
+        yield return new WaitForSeconds(immortalTime);
+        // Do not shoot if you're reloading
+        immortal = false;
     }
 }

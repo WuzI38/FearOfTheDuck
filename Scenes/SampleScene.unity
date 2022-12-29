@@ -11793,7 +11793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382242276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4610299, y: -0.30206555, z: -22.023449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13450,6 +13450,7 @@ GameObject:
   - component: {fileID: 1530561673}
   - component: {fileID: 1530561675}
   - component: {fileID: 1530561676}
+  - component: {fileID: 1530561677}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -13477,7 +13478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530561672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.5258465, y: -55.337944, z: -18.796638}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13508,6 +13509,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 247286308}
+--- !u!114 &1530561677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530561672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bb40c5fc3287c40b9117f543206cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Shot
+    clip: {fileID: 8300000, guid: 5050d67b1fe8f4c4cb4fd95af6dd7b44, type: 3}
+    volume: 0.6
+    pitch: 3
+    loop: 0
+    source: {fileID: 0}
+  - name: Reload
+    clip: {fileID: 8300000, guid: 8941acaec8d5da14b838400f563e13ac, type: 3}
+    volume: 0.6
+    pitch: 3
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1561476472
 GameObject:
   m_ObjectHideFlags: 0
@@ -13686,6 +13712,7 @@ MonoBehaviour:
   spikeTile3: {fileID: 11400000, guid: 052675ed40f74444cb03147f12426f2f, type: 2}
   startTile: {fileID: 11400000, guid: 64b3d6c8742bb2e4eb12f5b524f17d53, type: 2}
   exitTile: {fileID: 11400000, guid: 7bbd53f6a48903845b44c5d7faa7e9fc, type: 2}
+  middleTile: {fileID: 11400000, guid: 49d71d38b59a08849a7c3c660b3789c2, type: 2}
   healthSmall: {fileID: 21300000, guid: d644fe0b665cbe9419f6545f1a708cd1, type: 3}
   pistol: {fileID: 21300000, guid: 0f2783cb8322c3d449a3dbb21d05c1f1, type: 3}
   rifle: {fileID: 21300000, guid: e789333cac2d9e34183eb56c9c9e0707, type: 3}
@@ -13697,7 +13724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758283786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1142.483, y: 487.09067, z: -163.75015}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -31593,7 +31620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118778861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8231068, y: -0.46862328, z: -1.2310104}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public static class ChestGenerator
 {
@@ -22,8 +21,8 @@ public static class ChestGenerator
                 chests--;
             }
         }
-        string path = "Assets/Prefabs/Chest.prefab";
-        GameObject chestPrefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+        string path = "Prefabs/Chest";
+        GameObject chestPrefab = Resources.Load(path, typeof(GameObject)) as GameObject;
         float size = chestPrefab.GetComponent<SpriteRenderer>().size.x / 2;
         foreach(Vector2Int cp in chestPos) {
             // Vector2 position = Camera.main.ScreenToWorldPoint(new Vector2(cp.x, cp.y));

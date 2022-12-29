@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -26,14 +25,14 @@ public class EnemySpawner : MonoBehaviour
             // Cannot use spawnPositions.Skip(1) as spawnPositions might be reduced to just one element
             if(spawnPositions.Count > 0) {
                 float size = player.GetComponent<SpriteRenderer>().size.x / 2;
-                Vector2 worldPosition = new Vector2(size * (1 + 2 * spawnPositions[0].x), size * (1 + 2 * spawnPositions[0].y));
-                float distance = Vector2.Distance(player.transform.position, spawnPositions[0]);
+                Vector2 worldPosition;
+                float distance = 100f; // Just a random high value 
                 foreach(Vector2Int pos in spawnPositions) {
                     // Calculate the real distance (beased on tile size)
-                    worldPosition = new Vector2(size * (1 + 2 * pos.x), size * (1 + 2 * pos.y));
+                    worldPosition = new Vector3(size + pos.x * size * 2, size + pos.y * size * 2, 0);
                     distance = Mathf.Min(Vector2.Distance(player.transform.position, worldPosition), distance);
                     GameState state = GameManager.Instance.state;
-                    // If player entered the room
+                    // If player entered the room   
                     if(state == GameState.Running && distance < 7.45f) {
                         // Remove visited room from rooms meant to spawn enemies
                         spawnPositions.Remove(pos);
@@ -45,12 +44,11 @@ public class EnemySpawner : MonoBehaviour
                         break;
                     }
                 }
-                Debug.Log(distance);
             }
         }
     }
 
-    public void SetSpawnPositions(List<Vector2Int> allPositions, HashSet<Vector2Int> saePositions, HashSet<Vector2Int> chestPositions) {
+    public List<Vector2Int> SetSpawnPositions(List<Vector2Int> allPositions, HashSet<Vector2Int> saePositions, HashSet<Vector2Int> chestPositions) {
         // Save positions not chosen as spawn, exit or chest positions to hashset
         foreach(Vector2Int pos in allPositions) {
             if(!saePositions.Contains(pos) && !chestPositions.Contains(pos)) {
@@ -58,6 +56,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
         initialized = true;
+        return spawnPositions;
     }
 
     void SpawnEnemies(int amount, Vector2Int pos, float size) {
@@ -65,8 +64,8 @@ public class EnemySpawner : MonoBehaviour
         // Get the positions of walls to prevent the game from spawning enemies inside the walls
         HashSet<Vector2Int> walls = WallGenerator.WallPositions;
         for(int i = 0; i < amount; i++) {
-            string path = "Assets/Prefabs/DuckDuckGo.prefab";
-            GameObject enemyPrefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
+            string path = "Prefabs/DuckDuckGo";
+            GameObject enemyPrefab = Resources.Load(path, typeof(GameObject)) as GameObject;
             Vector2Int newPos;
             // Choose random position for the enemy and make sure it is not inside the wall + all chosen positions are different
             do {
