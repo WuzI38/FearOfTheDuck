@@ -1,7 +1,9 @@
-I just came up with an idea...
-I can use README as a todo list! So...
-I've decided to divide it into categories, cause there is a lot of stuff to do
+## Full version
+The playable version of the game (FearOfTheDuck.exe) is accessible in the builds directory - you need all the files in that directory for the game to work properly (resources, files generated during building process). After launching the app there might be an error occuring - the crosshair may be missing. In that case just turn the whole application off and start it over again.
 
-THE GAME IS FINISHED?
-
-## Fix crosshair bug
+## Controls
+WSAD/arrows - movement
+E - interaction/pickup
+R - reload
+Mouse scroll - switch items
+Mouse left button - attack
