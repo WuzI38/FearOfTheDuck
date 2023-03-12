@@ -1,5 +1,5 @@
 ## About
-The playable version of the game (FearOfTheDuck.exe) can be built using unity environment. After launching the game for the first time the crosshair may not appear - in that case just restart the game.
+The playable version of the game (FearOfTheDuck.exe) can be built using unity environment. The project was made for my object oriented programming class
 
 ## Controls
 * WSAD/arrows - movement
